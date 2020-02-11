@@ -25,10 +25,26 @@ else
 			echo "INFO: Created ${DIGIKUBE_MASTER_PROJECT} project"
 		fi
 	fi
-	gcloud alpha billing accounts list
-	read -p "Please enter the row number for the billing account to use.  Ignore the header row. : " billingAccountSelect
-	billingAccountId=$(gcloud alpha billing accounts list | sed -n ${billingAccountSelect}p | awk '{print $1}')
-	gcloud beta billing projects link "${DIGIKUBE_MASTER_PROJECT}" --billing-account="${billingAccountId}"
+	billingAccountList=$(gcloud alpha billing accounts list)
+	billingAccountCount=$(echo -n "${billingAccountList}" | grep -c '^')
+	if [[ ${billingAccountCount} -lt 1 ]]; then
+		echo "No billing account available.  Exiting..."
+		exit 1
+	else
+		if [[ ${billingAccountCount} -eq 2 ]]; then
+			billingAccountId=$(echo "$(gcloud alpha billing accounts list)" | sed -n 2p | awk '{print $1}')
+		else
+			echo "SR# $("$(gcloud alpha billing accounts list)" | sed -n 1p)"
+			for (( c=2; c<=${billingAccountCount}; c++ ))
+			do  
+				echo " $($c-1) $(gcloud alpha billing accounts list | sed -n ${billingAccountSelect}p)"
+			done
+			read -p "Please enter the row number for the billing account to use.  Ignore the header row. : " billingAccountSelect
+			billingAccountSelect=${billingAccountSelect}+1
+			billingAccountId=$("$(gcloud alpha billing accounts list)" | sed -n ${billingAccountSelect}p | awk '{print $1}')
+			gcloud beta billing projects link "${DIGIKUBE_MASTER_PROJECT}" --billing-account="${billingAccountId}"
+		fi
+	fi
 fi
 
 #################################################################
