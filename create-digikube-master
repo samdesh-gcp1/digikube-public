@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Main script to create master setup
 
 # Input parameters - none 
@@ -42,4 +42,5 @@ else
 		else
 			echo "INFO: Created ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret"
 		fi
+	fi
 fi
