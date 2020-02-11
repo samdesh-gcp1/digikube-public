@@ -30,7 +30,7 @@ fi
 # Create secret to hold github access token
 #----------------------------------------------------------------
 
-getGithubAccessTokenSecret=$(gcloud beta secrets versions latest --secret="${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" --project_id="${DIGIKUBE_MASTER_PROJECT}" | grep "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" |  awk '{print $1}')
+getGithubAccessTokenSecret=$(gcloud beta secrets versions 1 --secret="${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" --project_id="${DIGIKUBE_MASTER_PROJECT}" | grep "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" |  awk '{print $1}')
 if [[ $? -gt 0 ]]; then
 	echo "WARN: Error while checking availability of ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret.  Exiting..."
 else
