@@ -23,6 +23,7 @@ else
 		else
 			echo "INFO: Created ${DIGIKUBE_MASTER_PROJECT} project"
 		fi
+	fi
 fi
 
 #################################################################
