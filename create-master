@@ -1,0 +1,45 @@
+#!/bin/sh
+# Main script to create master setup
+
+# Input parameters - none 
+
+DIGIKUBE_MASTER_PROJECT="digikube-master"
+DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET="digikube-github-access-token-secret"
+
+#################################################################
+# Create master project
+#----------------------------------------------------------------
+
+getMasterProject=$(gcloud projects list --filter="project_id=${DIGIKUBE_MASTER_PROJECT}" | grep "${DIGIKUBE_MASTER_PROJECT}" |  awk '{print $1}')
+if [[ $? -gt 0 ]]; then
+	echo "WARN: Error while checking availability of ${DIGIKUBE_MASTER_PROJECT} project.  Exiting..."
+else
+	if [[ "${getMasterProject}" == "${DIGIKUBE_MASTER_PROJECT}" ]]; then
+		echo "INFO: ${DIGIKUBE_MASTER_PROJECT} project already available.  Reusing existing project."
+	else
+		gcloud projects create "${DIGIKUBE_MASTER_PROJECT}" --labels="group=digikube,version=0_1" --name="${DIGIKUBE_MASTER_PROJECT}"
+		if [[ $? -gt 0 ]]; then
+			echo "ERROR: Error while creating ${DIGIKUBE_MASTER_PROJECT} project"
+		else
+			echo "INFO: Created ${DIGIKUBE_MASTER_PROJECT} project"
+		fi
+fi
+
+#################################################################
+# Create secret to hold github access token
+#----------------------------------------------------------------
+
+getGithubAccessTokenSecret=$(gcloud beta secrets versions latest --secret="${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" --project_id=${DIGIKUBE_MASTER_PROJECT}" | grep "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" |  awk '{print $1}')
+if [[ $? -gt 0 ]]; then
+	echo "WARN: Error while checking availability of ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret.  Exiting..."
+else
+	if [[ "${getGithubAccessTokenSecret}" == "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" ]]; then
+		echo "INFO: ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret already available.  Reusing existing secret."
+	else
+		gcloud beta secrets create "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" --data-file=- --labels="group=digikube,version=0_1" --locations="us-central1" --replication-policy="user-managed"
+		if [[ $? -gt 0 ]]; then
+			echo "ERROR: Error while creating ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret"
+		else
+			echo "INFO: Created ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret"
+		fi
+fi
