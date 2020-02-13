@@ -25,15 +25,19 @@ else
 			echo "INFO: Created ${DIGIKUBE_MASTER_PROJECT} project"
 		fi
 	fi
+	echo "aaaaa"
 	billingAccountList=$(gcloud alpha billing accounts list)
 	billingAccountCount=$(echo -n "${billingAccountList}" | grep -c '^')
 	if [[ ${billingAccountCount} -lt 1 ]]; then
 		echo "No billing account available.  Exiting..."
 		exit 1
 	else
+		echo "bbbb"
 		if [[ ${billingAccountCount} -eq 2 ]]; then
+			echo "cccc"
 			billingAccountId=$(echo "$(gcloud alpha billing accounts list)" | sed -n 2p | awk '{print $1}')
 		else
+			echo "dddd"
 			echo "SR# $("$(gcloud alpha billing accounts list)" | sed -n 1p)"
 			for (( c=2; c<=${billingAccountCount}; c++ ))
 			do  
@@ -50,6 +54,7 @@ fi
 #################################################################
 # Enable secretmanager.googleapis.com API
 #----------------------------------------------------------------
+echo "eeeee"
 gcloud services enable secretmanager.googleapis.com --project="${DIGIKUBE_MASTER_PROJECT}"
 if [[ $? -gt 0 ]]; then
 	echo "ERROR: Error while enabling service secretmanager.googleapis.com for project ${DIGIKUBE_MASTER_PROJECT} project.  Exiting..."
