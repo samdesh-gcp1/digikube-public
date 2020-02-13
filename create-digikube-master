@@ -47,7 +47,13 @@ else
 	fi
 fi
 
-exit 0
+gcloud services enable secretmanager.googleapis.com --project="${DIGIKUBE_MASTER_PROJECT}"
+if [[ $? -gt 0 ]]; then
+	echo "ERROR: Error while enabling service secretmanager.googleapis.com for project ${DIGIKUBE_MASTER_PROJECT} project.  Exiting..."
+	exit 1
+else
+	echo "INFO: Enabled service secretmanager.googleapis.com for project ${DIGIKUBE_MASTER_PROJECT} project"
+fi
 
 #################################################################
 # Create secret to hold github access token
