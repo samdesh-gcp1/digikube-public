@@ -47,6 +47,7 @@ else
 			billingAccountSelect=${billingAccountSelect}+1
 			billingAccountId=$("$(gcloud alpha billing accounts list)" | sed -n ${billingAccountSelect}p | awk '{print $1}')
 		fi
+		echo "gcloud beta billing projects link ${DIGIKUBE_MASTER_PROJECT} --billing-account=${billingAccountId}"
 		gcloud beta billing projects link "${DIGIKUBE_MASTER_PROJECT}" --billing-account="${billingAccountId}"
 	fi
 fi
