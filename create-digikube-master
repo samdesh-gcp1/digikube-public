@@ -47,6 +47,9 @@ else
 	fi
 fi
 
+#################################################################
+# Enable secretmanager.googleapis.com API
+#----------------------------------------------------------------
 gcloud services enable secretmanager.googleapis.com --project="${DIGIKUBE_MASTER_PROJECT}"
 if [[ $? -gt 0 ]]; then
 	echo "ERROR: Error while enabling service secretmanager.googleapis.com for project ${DIGIKUBE_MASTER_PROJECT} project.  Exiting..."
@@ -54,6 +57,7 @@ if [[ $? -gt 0 ]]; then
 else
 	echo "INFO: Enabled service secretmanager.googleapis.com for project ${DIGIKUBE_MASTER_PROJECT} project"
 fi
+
 
 #################################################################
 # Create secret to hold github access token
