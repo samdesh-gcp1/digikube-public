@@ -3,7 +3,7 @@
 
 # Input parameters - none 
 
-DIGIKUBE_MASTER_PROJECT="digikube-master"
+DIGIKUBE_MASTER_PROJECT="digikube-master1"
 DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET="digikube-github-access-token-secret"
 
 #################################################################
@@ -46,6 +46,8 @@ else
 		fi
 	fi
 fi
+
+exit 0
 
 #################################################################
 # Create secret to hold github access token
