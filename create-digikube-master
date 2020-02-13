@@ -46,8 +46,8 @@ else
 			read -p "Please enter the row number for the billing account to use.  Ignore the header row. : " billingAccountSelect
 			billingAccountSelect=${billingAccountSelect}+1
 			billingAccountId=$("$(gcloud alpha billing accounts list)" | sed -n ${billingAccountSelect}p | awk '{print $1}')
-			gcloud beta billing projects link "${DIGIKUBE_MASTER_PROJECT}" --billing-account="${billingAccountId}"
 		fi
+		gcloud beta billing projects link "${DIGIKUBE_MASTER_PROJECT}" --billing-account="${billingAccountId}"
 	fi
 fi
 
