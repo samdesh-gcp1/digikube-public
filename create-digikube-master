@@ -76,11 +76,13 @@ else
 	if [[ "${getGithubAccessTokenSecret}" == "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" ]]; then
 		echo "INFO: ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret already available.  Reusing existing secret."
 	else
-		gcloud beta secrets create "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" --data-file=- --labels="group=digikube,version=0_1" --locations="us-central1" --replication-policy="user-managed"
+		read -s -p "Please enter the github.com access token : " __gitHubAccessToken
+		echo -n ${__gitHubAccessToken} | gcloud beta secrets create "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" --labels="group=digikube,version=0_1" --locations="us-central1" --replication-policy="user-managed" --data-file=-
 		if [[ $? -gt 0 ]]; then
 			echo "ERROR: Error while creating ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret"
 		else
 			echo "INFO: Created ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret"
 		fi
+		unset __gitHubAccessToken
 	fi
 fi
