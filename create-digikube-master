@@ -85,9 +85,9 @@ else
 	else
 		echo "kkkk"
 		echo "Please enter the github.com access token : "
-		read __gitHubAccessToken
+		read gitHubAccessToken
 		echo "llll"
-		echo -n ${__gitHubAccessToken} | gcloud beta secrets create "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" --project="${DIGIKUBE_MASTER_PROJECT}" --labels="group=digikube,version=0_1" --locations="us-central1" --replication-policy="user-managed" --data-file=-
+		echo -n ${gitHubAccessToken} | gcloud beta secrets create "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" --project="${DIGIKUBE_MASTER_PROJECT}" --labels="group=digikube,version=0_1" --locations="us-central1" --replication-policy="user-managed" --data-file=-
 		if [[ $? -gt 0 ]]; then
 			echo "mmmm"
 			echo "ERROR: Error while creating ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret"
