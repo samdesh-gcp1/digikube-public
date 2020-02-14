@@ -25,19 +25,15 @@ else
 			echo "INFO: Created ${DIGIKUBE_MASTER_PROJECT} project"
 		fi
 	fi
-	echo "aaaaa"
 	billingAccountList=$(gcloud alpha billing accounts list)
 	billingAccountCount=$(echo -n "${billingAccountList}" | grep -c '^')
 	if [[ ${billingAccountCount} -lt 1 ]]; then
 		echo "No billing account available.  Exiting..."
 		exit 1
 	else
-		echo "bbbb"
 		if [[ ${billingAccountCount} -eq 2 ]]; then
-			echo "cccc"
 			billingAccountId=$(echo "$(gcloud alpha billing accounts list)" | sed -n 2p | awk '{print $1}')
 		else
-			echo "dddd"
 			echo "SR# $("$(gcloud alpha billing accounts list)" | sed -n 1p)"
 			for (( c=2; c<=${billingAccountCount}; c++ ))
 			do  
@@ -55,7 +51,6 @@ fi
 #################################################################
 # Enable secretmanager.googleapis.com API
 #----------------------------------------------------------------
-echo "eeeee"
 gcloud services enable secretmanager.googleapis.com --project="${DIGIKUBE_MASTER_PROJECT}"
 if [[ $? -gt 0 ]]; then
 	echo "ERROR: Error while enabling service secretmanager.googleapis.com for project ${DIGIKUBE_MASTER_PROJECT} project.  Exiting..."
@@ -69,33 +64,21 @@ fi
 # Create secret to hold github access token
 #----------------------------------------------------------------
 
-echo "ffff"
 getGithubAccessTokenSecret=$(gcloud beta secrets list --project="${DIGIKUBE_MASTER_PROJECT}" --filter="${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}"| grep "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" |  awk '{print $1}')
-echo "gggg"
 if [[ $? -gt 0 ]]; then
-	echo "hhhh"
 	echo "WARN: Error while checking availability of ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret.  Exiting..."
 else
-	echo "iiii"
-	echo "getGithubAccessTokenSecret => ${getGithubAccessTokenSecret}"
-	echo "DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET => ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}"
 	if [[ "${getGithubAccessTokenSecret}" == "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" ]]; then
-		echo "jjjj"
 		echo "INFO: ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret already available.  Reusing existing secret."
 	else
-		echo "kkkk1234"
-		echo "Please enter the github.com access token : "
-		read gitHubAccessToken </dev/tty
-		echo "llll"
+		echo -n "Please enter the github.com access token : "
+		read -s gitHubAccessToken </dev/tty
 		echo -n ${gitHubAccessToken} | gcloud beta secrets create "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" --project="${DIGIKUBE_MASTER_PROJECT}" --labels="group=digikube,version=0_1" --locations="us-central1" --replication-policy="user-managed" --data-file=-
 		if [[ $? -gt 0 ]]; then
-			echo "mmmm"
 			echo "ERROR: Error while creating ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret"
 		else
-			echo "nnnn"
 			echo "INFO: Created ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret"
 		fi
-		unset __gitHubAccessToken
-		echo "oooo"
+		unset gitHubAccessToken
 	fi
 fi
