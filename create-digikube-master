@@ -3,7 +3,9 @@
 
 # Input parameters - none 
 
-DIGIKUBE_MASTER_PROJECT="digikube-master3"
+if [[ -z ${DIGIKUBE_MASTER_PROJECT} ]]; then
+	DIGIKUBE_MASTER_PROJECT="digikube-master"
+fi
 DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET="digikube-github-access-token-secret"
 
 #################################################################
