@@ -84,7 +84,8 @@ else
 		echo "INFO: ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret already available.  Reusing existing secret."
 	else
 		echo "kkkk"
-		read -p "Please enter the github.com access token : " __gitHubAccessToken
+		echo "Please enter the github.com access token : "
+		read __gitHubAccessToken
 		echo "llll"
 		echo -n ${__gitHubAccessToken} | gcloud beta secrets create "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" --project="${DIGIKUBE_MASTER_PROJECT}" --labels="group=digikube,version=0_1" --locations="us-central1" --replication-policy="user-managed" --data-file=-
 		if [[ $? -gt 0 ]]; then
