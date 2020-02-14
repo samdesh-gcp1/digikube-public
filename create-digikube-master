@@ -44,7 +44,7 @@ else
 			billingAccountId=$("$(gcloud alpha billing accounts list)" | sed -n ${billingAccountSelect}p | awk '{print $1}')
 		fi
 		echo "gcloud beta billing projects link ${DIGIKUBE_MASTER_PROJECT} --billing-account=${billingAccountId}"
-		gcloud beta billing projects link "${DIGIKUBE_MASTER_PROJECT}" --billing-account="${billingAccountId}"
+		gcloud --quiet beta billing projects link "${DIGIKUBE_MASTER_PROJECT}" --billing-account="${billingAccountId}"
 	fi
 fi
 
@@ -64,7 +64,7 @@ fi
 # Create secret to hold github access token
 #----------------------------------------------------------------
 
-getGithubAccessTokenSecret=$(gcloud beta secrets list --project="${DIGIKUBE_MASTER_PROJECT}" --filter="${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}"| grep "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" |  awk '{print $1}')
+getGithubAccessTokenSecret=$(gcloud --quiet beta secrets list --project="${DIGIKUBE_MASTER_PROJECT}" --filter="${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}"| grep "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" |  awk '{print $1}')
 if [[ $? -gt 0 ]]; then
 	echo "WARN: Error while checking availability of ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret.  Exiting..."
 else
