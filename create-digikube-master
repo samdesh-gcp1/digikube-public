@@ -70,7 +70,7 @@ fi
 #----------------------------------------------------------------
 
 echo "ffff"
-getGithubAccessTokenSecret=$(gcloud beta secrets list --project="${DIGIKUBE_MASTER_PROJECT}" --filter="name=${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}"| grep "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" |  awk '{print $1}')
+getGithubAccessTokenSecret=$(gcloud beta secrets list --project="${DIGIKUBE_MASTER_PROJECT}" --filter="${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}"| grep "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" |  awk '{print $1}')
 echo "gggg"
 if [[ $? -gt 0 ]]; then
 	echo "hhhh"
