@@ -77,6 +77,8 @@ if [[ $? -gt 0 ]]; then
 	echo "WARN: Error while checking availability of ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret.  Exiting..."
 else
 	echo "iiii"
+	echo "getGithubAccessTokenSecret => ${getGithubAccessTokenSecret}"
+	echo "DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET => ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}"
 	if [[ "${getGithubAccessTokenSecret}" == "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" ]]; then
 		echo "jjjj"
 		echo "INFO: ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret already available.  Reusing existing secret."
