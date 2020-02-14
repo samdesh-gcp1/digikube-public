@@ -3,7 +3,7 @@
 
 # Input parameters - none 
 
-DIGIKUBE_MASTER_PROJECT="digikube-master2"
+DIGIKUBE_MASTER_PROJECT="digikube-master3"
 DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET="digikube-github-access-token-secret"
 
 #################################################################
