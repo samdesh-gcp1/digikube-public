@@ -7,7 +7,7 @@ digikubeMasterProject="digikube-master3"
 digikubeGithubAccessTokenName="digikube-github-access-token-secret"
 digikubeGithubAccessTokenVersion="latest"
 
-digikubeCoreRepoAccessToken=$(gcloud beta secrets versions access ${digikubeAccessTokenVersion} --secret=${digikubeGithubAccessTokenName} --project=${digikubeMasterProject})
+digikubeCoreRepoAccessToken=$(gcloud beta secrets versions access ${digikubeGithubAccessTokenVersion} --secret=${digikubeGithubAccessTokenName} --project=${digikubeMasterProject})
 echo $digikubeCoreRepoAccessToken
 exit 0
 
