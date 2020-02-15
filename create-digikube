@@ -3,10 +3,11 @@
 
 digikubeCodeRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/digikube-core/master"
 digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/c1-dev1/master"
-digikubeCoreRepoAccessToken=$(gcloud beta secrets versions access 1 --secret=digikube-github-access-token-secret --project=digikube-master3)
+digikubeMasterProject="digikube-master3"
+digikubeGithubAccessTokenName="digikube-github-access-token-secret"
 
+digikubeCoreRepoAccessToken=$(gcloud beta secrets versions access 1 --secret=${digikubeGithubAccessTokenName} --project=${digikubeMasterProject})
 echo $digikubeCoreRepoAccessToken
-
 exit 0
 
 tmpExecDir=$(mktemp -d --suffix="-digikube")
