@@ -65,8 +65,6 @@ else
 	echo "INFO: Enabled service secretmanager.googleapis.com for project ${DIGIKUBE_MASTER_PROJECT} project"
 fi
 
-19a3328496a9e35f7ae956501ec752932ef24fe2
-
 #################################################################
 # Create secret to hold core repo access token
 #----------------------------------------------------------------
