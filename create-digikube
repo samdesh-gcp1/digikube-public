@@ -1,22 +1,26 @@
 #!/bin/bash
 #All starts here
 
-digikubeCodeRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/digikube-core/master"
+digikubeCoreRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/digikube-core/master"
 digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/c1-dev1/master"
 digikubeMasterProject="digikube-master3"
-digikubeCoreRepoAccessToken="digikube-github-access-token-secret"
+digikubeCoreRepoAccessTokenName="digikube-core-repo-access-token"
 digikubeCoreRepoAccessTokenVersion="latest"
+digikubeInstanceRepoAccessTokenName="digikube-instance-repo-access-token-version"
+digikubeInstanceRepoAccessTokenVersion="latest"
 
-digikubeCoreRepoAccessToken=$(gcloud beta secrets versions access ${digikubeCoreRepoAccessTokenVersion} --secret=${digikubeCoreRepoAccessToken} --project=${digikubeMasterProject})
-echo $digikubeCoreRepoAccessToken
+digikubeCoreRepoAccessTokenValue=$(gcloud beta secrets versions access ${digikubeCoreRepoAccessTokenVersion} --secret=${digikubeCoreRepoAccessTokenName} --project=${digikubeMasterProject})
+echo "${digikubeCoreRepoAccessTokenName}: ${digikubeCoreRepoAccessTokenVersion}: ${digikubeCoreRepoAccessTokenValue}"
+digikubeInstanceRepoAccessTokenValue=$(gcloud beta secrets versions access ${digikubeInstanceRepoAccessTokenVersion} --secret=${digikubeInstanceRepoAccessTokenName} --project=${digikubeMasterProject})
+echo "${digikubeInstanceRepoAccessTokenName}: ${digikubeInstanceRepoAccessTokenVersion}: ${digikubeInstanceRepoAccessTokenValue}"
 
 tmpExecDir=$(mktemp -d --suffix="-digikube")
 bootstrapShell="${tmpExecDir}/bootstrap"
 wget --no-cache \
-	 --header="Authorization: token ${digikubeCoreRepoAccessToken}" \
-	 -O ${bootstrapShell} - "${digikubeCodeRawRepoUrl}/cloud-init/bootstrap"
+	 --header="Authorization: token ${digikubeCoreRepoAccessTokenValue}" \
+	 -O ${bootstrapShell} - "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
 chmod +x ${bootstrapShell}
-${bootstrapShell} ${digikubeCodeRawRepoUrl} ${digikubeInstanceRawRepoUrl} create
+${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCodeRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} create
 #rm -rf "${tmpExecDir}"
 digikubeCoreRepoAccessToken=""
 unset digikubeCoreRepoAccessToken
