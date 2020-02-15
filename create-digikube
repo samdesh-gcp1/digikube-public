@@ -24,6 +24,7 @@ wget --no-cache \
 	 --header="Authorization: token ${digikubeCoreRepoAccessTokenValue}" \
 	 -O ${bootstrapShell} - "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
 chmod +x ${bootstrapShell}
+echo "${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCodeRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} create"
 ${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCodeRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} create
 #rm -rf "${tmpExecDir}"
 digikubeCoreRepoAccessToken=""
