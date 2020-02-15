@@ -4,12 +4,11 @@
 digikubeCodeRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/digikube-core/master"
 digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/c1-dev1/master"
 digikubeMasterProject="digikube-master3"
-digikubeGithubAccessTokenName="digikube-github-access-token-secret"
-digikubeGithubAccessTokenVersion="latest"
+digikubeCoreRepoAccessToken="digikube-github-access-token-secret"
+digikubeCoreRepoAccessTokenVersion="latest"
 
-digikubeCoreRepoAccessToken=$(gcloud beta secrets versions access ${digikubeGithubAccessTokenVersion} --secret=${digikubeGithubAccessTokenName} --project=${digikubeMasterProject})
+digikubeCoreRepoAccessToken=$(gcloud beta secrets versions access ${digikubeCoreRepoAccessTokenVersion} --secret=${digikubeCoreRepoAccessToken} --project=${digikubeMasterProject})
 echo $digikubeCoreRepoAccessToken
-exit 0
 
 tmpExecDir=$(mktemp -d --suffix="-digikube")
 bootstrapShell="${tmpExecDir}/bootstrap"
