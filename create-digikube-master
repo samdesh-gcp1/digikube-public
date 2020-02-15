@@ -3,8 +3,14 @@
 
 # Input parameters - none 
 
+#################################################################
+# Edit the following values as per your setup
+#----------------------------------------------------------------
 DIGIKUBE_MASTER_PROJECT="digikube-master3"
-DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET="digikube-github-access-token-secret"
+DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME="digikube-core-repo-access-token"
+DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME="digikube-instance-repo-access-token"
+DIGIKUBE_CLOUD_REGION="us-central1"
+
 
 #################################################################
 # Create master project
@@ -59,26 +65,52 @@ else
 	echo "INFO: Enabled service secretmanager.googleapis.com for project ${DIGIKUBE_MASTER_PROJECT} project"
 fi
 
+19a3328496a9e35f7ae956501ec752932ef24fe2
 
 #################################################################
-# Create secret to hold github access token
+# Create secret to hold core repo access token
 #----------------------------------------------------------------
 
-getGithubAccessTokenSecret=$(gcloud --quiet beta secrets list --project="${DIGIKUBE_MASTER_PROJECT}" --filter="${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}"| grep "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" |  awk '{print $1}')
+getCoreRepoAccessToken=$(gcloud --quiet beta secrets list --project="${DIGIKUBE_MASTER_PROJECT}" --filter="${DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME}"| grep "${DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME}" |  awk '{print $1}')
 if [[ $? -gt 0 ]]; then
-	echo "WARN: Error while checking availability of ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret.  Exiting..."
+	echo "WARN: Error while checking availability of ${DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME} secret.  Exiting..."
 else
-	if [[ "${getGithubAccessTokenSecret}" == "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" ]]; then
-		echo "INFO: ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret already available.  Reusing existing secret."
+	if [[ "${getCoreRepoAccessTokenName}" == "${DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAMET}" ]]; then
+		echo "INFO: ${DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME} secret already available.  Reusing existing secret."
 	else
 		echo -n "Please enter the github.com access token : "
-		read -s gitHubAccessToken </dev/tty
-		echo -n ${gitHubAccessToken} | gcloud beta secrets create "${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET}" --project="${DIGIKUBE_MASTER_PROJECT}" --labels="group=digikube,version=0_1" --locations="us-central1" --replication-policy="user-managed" --data-file=-
+		read -s coreRepoAccessTokenValue </dev/tty
+		echo -n ${coreRepoAccessTokenValue} | gcloud beta secrets create "${DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME}" --project="${DIGIKUBE_MASTER_PROJECT}" --labels="group=digikube,version=0_1" --locations="${CLOUD_REGION}" --replication-policy="user-managed" --data-file=-
 		if [[ $? -gt 0 ]]; then
-			echo "ERROR: Error while creating ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret"
+			echo "ERROR: Error while creating ${DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME} secret"
 		else
-			echo "INFO: Created ${DIGIKUBE_GITHUB_ACCESS_TOKEN_SECRET} secret"
+			echo "INFO: Created ${DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME} secret"
 		fi
-		unset gitHubAccessToken
+		coreRepoAccessTokenValue=""
+		unset coreRepoAccessTokenValue
+	fi
+fi
+
+#################################################################
+# Create secret to hold instance repo access token
+#----------------------------------------------------------------
+
+getInstanceRepoAccessToken=$(gcloud --quiet beta secrets list --project="${DIGIKUBE_MASTER_PROJECT}" --filter="${DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME}"| grep "${DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME}" |  awk '{print $1}')
+if [[ $? -gt 0 ]]; then
+	echo "WARN: Error while checking availability of ${DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME} secret.  Exiting..."
+else
+	if [[ "${getInstanceRepoAccessTokenName}" == "${DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAMET}" ]]; then
+		echo "INFO: ${DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME} secret already available.  Reusing existing secret."
+	else
+		echo -n "Please enter the instance repository access token : "
+		read -s instanceRepoAccessTokenValue </dev/tty
+		echo -n ${instanceRepoAccessTokenValue} | gcloud beta secrets create "${DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME}" --project="${DIGIKUBE_MASTER_PROJECT}" --labels="group=digikube,version=0_1" --locations="${CLOUD_REGION}" --replication-policy="user-managed" --data-file=-
+		if [[ $? -gt 0 ]]; then
+			echo "ERROR: Error while creating ${DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME} secret"
+		else
+			echo "INFO: Created ${DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME} secret"
+		fi
+		instanceRepoAccessTokenValue=""
+		unset instanceRepoAccessTokenValue
 	fi
 fi
