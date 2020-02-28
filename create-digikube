@@ -10,9 +10,9 @@ digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/c1-de
 #Following values are also set in bastion-init-shell...  be consistent
 digikubeMasterProject="digikube-master3"
 digikubeCoreRepoAccessTokenName="digikube-core-repo-access-token"
-digikubeCoreRepoAccessTokenVersion="latest"
+digikubeCoreRepoAccessTokenVersion="2"
 digikubeInstanceRepoAccessTokenName="digikube-instance-repo-access-token"
-digikubeInstanceRepoAccessTokenVersion="latest"
+digikubeInstanceRepoAccessTokenVersion="2"
 
 
 digikubeCoreRepoAccessTokenValue=$(gcloud beta secrets versions access ${digikubeCoreRepoAccessTokenVersion} --secret=${digikubeCoreRepoAccessTokenName} --project=${digikubeMasterProject})
