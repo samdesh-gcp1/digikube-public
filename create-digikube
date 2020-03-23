@@ -22,9 +22,7 @@ echo "${digikubeInstanceRepoAccessTokenName}: ${digikubeInstanceRepoAccessTokenV
 
 tmpExecDir=$(mktemp -d --suffix="-digikube")
 bootstrapShell="${tmpExecDir}/bootstrap"
-wget --no-cache \
-	 --header="Authorization: token ${digikubeCoreRepoAccessTokenValue}" \
-	 -O ${bootstrapShell} - "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
+wget --no-cache --header="Authorization: token ${digikubeCoreRepoAccessTokenValue}" -O ${bootstrapShell} - "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
 chmod +x ${bootstrapShell}
 echo "${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} create"
 ${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} create
