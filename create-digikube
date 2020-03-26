@@ -24,10 +24,10 @@ tmpExecDir=$(mktemp -d --suffix="-digikube")
 bootstrapShell="${tmpExecDir}/bootstrap"
 headerString="--header='Authorization: token ${digikubeCoreRepoAccessTokenValue}'"
 echo $headerString
-cmd1="wget --no-cache --header=\"Authorization: token ${digikubeCoreRepoAccessTokenValue}\" -O ${bootstrapShell} \"${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\""
+cmd1="wget --no-cache $headerString -O ${bootstrapShell} \"${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\""
 
 echo $cmd1
-wget --no-cache --header=\"Authorization: token ${digikubeCoreRepoAccessTokenValue}\" -O ${bootstrapShell} \"${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\"
+wget --no-cache $headerString -O ${bootstrapShell} \"${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\"
 
 #wget --no-cache --header="Authorization: token ${digikubeCoreRepoAccessTokenValue}" -O ${bootstrapShell} - "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
 chmod +x ${bootstrapShell}
