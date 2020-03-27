@@ -35,7 +35,7 @@ echo $cmd1
 
 echo "Hi1"
 
-$("${cmd1}")
+$(${cmd1})
 
 echo "Hi2"
 
