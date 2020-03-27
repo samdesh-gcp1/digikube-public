@@ -26,12 +26,12 @@ bootstrapShell="${tmpExecDir}/bootstrap"
 headerString="--header='Authorization: token ${digikubeCoreRepoAccessTokenValue}'"
 echo $headerString
 
-echo "Hi 3"
+echo "Hi 5"
 
-cmd1="wget --no-cache \"${headerString}\" -O \"${bootstrapShell}\" "\${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\"
+cmd1="wget --no-cache \"${headerString}\" -O \"${bootstrapShell}\" "\${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\""
 echo $cmd1
 
-echo "hi 4"
+echo "hi 6"
 
 wget --no-cache "${headerString}" -O "${bootstrapShell}" "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
 #wget --no-cache $headerString -O ${bootstrapShell} \"${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\"
