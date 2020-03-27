@@ -28,7 +28,7 @@ echo $headerString
 
 echo "Hi 5"
 
-cmd1="wget --no-cache \"${headerString}\" -O \"${bootstrapShell}\" "\${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\""
+cmd1="wget --no-cache \"${headerString}\" -O \"${bootstrapShell}\" \"${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\""
 echo $cmd1
 
 echo "hi 6"
