@@ -23,9 +23,9 @@ echo "${digikubeInstanceRepoAccessTokenName}: ${digikubeInstanceRepoAccessTokenV
 tmpExecDir=$(mktemp -d --suffix="-digikube")
 bootstrapShell="${tmpExecDir}/bootstrap"
 
-echo "Hi 4"
+echo "Hi 6"
 echo $(ls ${bootstrapShell})
-echo "Hi 5"
+echo "Hi 7"
 
 headerString="--header='Authorization: token ${digikubeCoreRepoAccessTokenValue}'"
 echo $headerString
