@@ -16,30 +16,13 @@ digikubeInstanceRepoAccessTokenVersion="2"
 
 
 digikubeCoreRepoAccessTokenValue=$(gcloud beta secrets versions access ${digikubeCoreRepoAccessTokenVersion} --secret=${digikubeCoreRepoAccessTokenName} --project=${digikubeMasterProject})
-echo "${digikubeCoreRepoAccessTokenName}: ${digikubeCoreRepoAccessTokenVersion}: ${digikubeCoreRepoAccessTokenValue}"
 digikubeInstanceRepoAccessTokenValue=$(gcloud beta secrets versions access ${digikubeInstanceRepoAccessTokenVersion} --secret=${digikubeInstanceRepoAccessTokenName} --project=${digikubeMasterProject})
-echo "${digikubeInstanceRepoAccessTokenName}: ${digikubeInstanceRepoAccessTokenVersion}: ${digikubeInstanceRepoAccessTokenValue}"
 
 tmpExecDir=$(mktemp -d --suffix="-digikube")
 bootstrapShell="${tmpExecDir}/bootstrap"
 
-headerString="--header='Authorization: token ${digikubeCoreRepoAccessTokenValue}'"
-echo $headerString
-
-echo "Hi 9"
-
-cmd1="wget --no-cache \"${headerString}\" -O \"${bootstrapShell}\" \"${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\""
-echo $cmd1
-
-echo "hi 10"
-
 wget -d --no-cache --header="Authorization: token ${digikubeInstanceRepoAccessTokenValue}" -O "${bootstrapShell}" "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
-#wget --no-cache "${headerString}" -O "${bootstrapShell}" "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
-#wget --no-cache $headerString -O ${bootstrapShell} \"${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\"
 
-echo "Hi 11"
-
-#wget --no-cache --header="Authorization: token ${digikubeCoreRepoAccessTokenValue}" -O ${bootstrapShell} - "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
 chmod +x ${bootstrapShell}
 echo "${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} create"
 ${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} create
