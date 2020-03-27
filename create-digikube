@@ -36,9 +36,9 @@ echo $cmd1
 echo "Hi11
 
 #$(${cmd1})
-wget --no-cache "{$headerString}" -O "${bootstrapShell}" "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
+wget --no-cache "${headerString}" -O "${bootstrapShell}" "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
 
-echo "Hi10"
+echo "Hi15"
 
 #wget --no-cache $headerString -O ${bootstrapShell} \"${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\"
 
