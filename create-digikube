@@ -29,7 +29,7 @@ cmd1="wget --no-cache $headerString -O ${bootstrapShell} \"${digikubeCoreRawRepo
 echo $cmd1
 
 
-$(cmd1)
+$("${cmd1}")
 
 #wget --no-cache $headerString -O ${bootstrapShell} \"${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\"
 
