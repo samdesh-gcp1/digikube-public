@@ -21,7 +21,7 @@ digikubeInstanceRepoAccessTokenValue=$(gcloud beta secrets versions access ${dig
 tmpExecDir=$(mktemp -d --suffix="-digikube")
 bootstrapShell="${tmpExecDir}/bootstrap"
 
-wget -d --no-cache --header="Authorization: token ${digikubeInstanceRepoAccessTokenValue}" -O "${bootstrapShell}" "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
+wget --no-cache --header="Authorization: token ${digikubeInstanceRepoAccessTokenValue}" -O "${bootstrapShell}" "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
 
 chmod +x ${bootstrapShell}
 echo "${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} create"
