@@ -28,8 +28,11 @@ cmd1="wget --no-cache $headerString -O ${bootstrapShell} \"${digikubeCoreRawRepo
 
 echo $cmd1
 
+echo "Hi1"
 
 $("${cmd1}")
+
+echo "Hi2"
 
 #wget --no-cache $headerString -O ${bootstrapShell} \"${digikubeCoreRawRepoUrl}/cloud-init/bootstrap\"
 
