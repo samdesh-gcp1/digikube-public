@@ -1,0 +1,34 @@
+#!/bin/bash
+#All starts here
+
+############################################################################################
+# Update the values as per your requirements
+############################################################################################
+digikubeCoreRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/digikube-core/master"
+digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/c1-dev1/master"
+
+#Following values are also set in bastion-init-shell...  be consistent
+digikubeMasterProject="digikube-master3"
+digikubeCoreRepoAccessTokenName="digikube-core-repo-access-token"
+digikubeCoreRepoAccessTokenVersion="2"
+digikubeInstanceRepoAccessTokenName="digikube-instance-repo-access-token"
+digikubeInstanceRepoAccessTokenVersion="2"
+
+
+digikubeCoreRepoAccessTokenValue=$(gcloud beta secrets versions access ${digikubeCoreRepoAccessTokenVersion} --secret=${digikubeCoreRepoAccessTokenName} --project=${digikubeMasterProject})
+digikubeInstanceRepoAccessTokenValue=$(gcloud beta secrets versions access ${digikubeInstanceRepoAccessTokenVersion} --secret=${digikubeInstanceRepoAccessTokenName} --project=${digikubeMasterProject})
+
+tmpExecDir=$(mktemp -d --suffix="-digikube")
+bootstrapShell="${tmpExecDir}/bootstrap"
+
+wget --quiet --no-cache --header="Authorization: token ${digikubeInstanceRepoAccessTokenValue}" -O "${bootstrapShell}" "${digikubeCoreRawRepoUrl}/cloud-init/bootstrap"
+
+chmod +x ${bootstrapShell}
+
+${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} create
+
+#rm -rf "${tmpExecDir}"
+
+digikubeCoreRepoAccessToken=""
+
+unset digikubeCoreRepoAccessToken
