@@ -13,7 +13,7 @@ digikubeCoreRepoAccessTokenName="digikube-core-repo-access-token"
 digikubeCoreRepoAccessTokenVersion="2"
 digikubeInstanceRepoAccessTokenName="digikube-instance-repo-access-token"
 digikubeInstanceRepoAccessTokenVersion="2"
-
+forcedFlag="--forced"
 
 digikubeCoreRepoAccessTokenValue=$(gcloud beta secrets versions access ${digikubeCoreRepoAccessTokenVersion} --secret=${digikubeCoreRepoAccessTokenName} --project=${digikubeMasterProject})
 digikubeInstanceRepoAccessTokenValue=$(gcloud beta secrets versions access ${digikubeInstanceRepoAccessTokenVersion} --secret=${digikubeInstanceRepoAccessTokenName} --project=${digikubeMasterProject})
@@ -25,7 +25,7 @@ wget --quiet --no-cache --header="Authorization: token ${digikubeInstanceRepoAcc
 
 chmod +x ${bootstrapShell}
 
-${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} delete --forced
+${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} "delete" ${forcedFlag}
 
 #rm -rf "${tmpExecDir}"
 
