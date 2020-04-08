@@ -25,7 +25,15 @@ wget --quiet --no-cache --header="Authorization: token ${digikubeInstanceRepoAcc
 
 chmod +x ${bootstrapShell}
 
-${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} "delete" ${forcedFlag}
+echo "Please enter delete scope:"
+			echo "            Only K8S Cluster                                   : cluster"
+			echo "            K8S Cluster with bastion host                      : bastion-host"
+			echo "            K8S Cluster, bastion-host, cloud-resourses         : all"
+			echo "            K8S Cluster, bastion-host, cloud-resources, bucket : all-with-bucket"
+
+read -p "Enter your choice: " deleteChoice
+
+${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} "delete" ${deleteChoice} ${forcedFlag}
 
 #rm -rf "${tmpExecDir}"
 
