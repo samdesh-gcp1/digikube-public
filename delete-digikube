@@ -25,7 +25,7 @@ wget --quiet --no-cache --header="Authorization: token ${digikubeInstanceRepoAcc
 
 chmod +x ${bootstrapShell}
 
-${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} delete
+${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} delete --forced
 
 #rm -rf "${tmpExecDir}"
 
