@@ -27,7 +27,7 @@ chmod +x ${bootstrapShell}
 
 ${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} create
 
-#rm -rf "${tmpExecDir}"
+rm -rf "${tmpExecDir}"
 
 digikubeCoreRepoAccessToken=""
 
