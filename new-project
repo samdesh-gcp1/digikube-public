@@ -1,0 +1,14 @@
+#1. Create new project
+#2. Enable API
+#3. Set access to secrets in master project
+
+read -p "Enter name for new project: " digikubeProjectId < /dev/tty
+gcloud projects create "${digikubeProjectId}" --enable-cloud-apis --name="${digikubeProjectId}"
+
+gcloud config set project "${digikubeProjectId}"
+gcloud services enable "compute.googleapis.com"
+serviceAccount=$(gcloud iam service-accounts list --format "value(email)")
+
+gcloud config set project digikube-master3
+
+gcloud secrets add-iam-policy-binding secret-id --member="${serviceAccount}" --role"roles/secretmanager.secretAccessor"
