@@ -7,7 +7,7 @@ DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME="digikube-instance-repo-access-token"
 
 # Get the master project id and confirm if it is available
 read -p "Enter name for master project (must be already available): " digikubeMasterProjectId < /dev/tty
-tempMasterProjectId=$(gcloud projects list --filter="project_id=${digikubeMasterProjectId}" --format="value(project_id)"
+tempMasterProjectId=$(gcloud projects list --filter="project_id=${digikubeMasterProjectId}" --format="value(project_id)")
 if [[ "${digikubeMasterProjectId}" == "${tempMasterProjectId}" ]]; then
 	temp1=1
 else
@@ -17,7 +17,7 @@ fi
 
 # Get the name for the new project
 read -p "Enter name for new project: " digikubeProjectId < /dev/tty
-tempProjectId=$(gcloud projects list --filter="project_id=${digikubeProjectId}" --format="value(project_id)"
+tempProjectId=$(gcloud projects list --filter="project_id=${digikubeProjectId}" --format="value(project_id)")
 if [[ "${digikubeProjectId}" == "${tempProjectId}" ]]; then
 	echo "Project already available.  Do you want to reuse existing project?"
 	read -p "Project already available.  Do you want to reuse existing project? (y/n): " choice < /dev/tty
@@ -42,3 +42,5 @@ serviceAccount=$(gcloud iam service-accounts list --format "value(email)")
 gcloud config set project ${digikubeMasterProjectId}
 gcloud secrets add-iam-policy-binding "${DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME}" --member="${serviceAccount}" --role"roles/secretmanager.secretAccessor"
 gcloud secrets add-iam-policy-binding "${DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME}" --member="${serviceAccount}" --role"roles/secretmanager.secretAccessor"
+
+gcloud config set project ${digikubeProjectId}
