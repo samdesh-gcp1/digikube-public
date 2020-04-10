@@ -25,10 +25,12 @@ wget --quiet --no-cache --header="Authorization: token ${digikubeInstanceRepoAcc
 
 chmod +x ${bootstrapShell}
 
-${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} create
+${bootstrapShell} ${digikubeMasterProject} ${digikubeCoreRepoAccessTokenName} ${digikubeCoreRepoAccessTokenVersion} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenName} ${digikubeInstanceRepoAccessTokenVersion} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} create
 
 rm -rf "${tmpExecDir}"
 
 digikubeCoreRepoAccessToken=""
+digikubeInstanceRepoAccessToken=""
 
 unset digikubeCoreRepoAccessToken
+unset digikubeInstanceRepoAccessToken
