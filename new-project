@@ -5,6 +5,8 @@
 DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME="digikube-core-repo-access-token"
 DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME="digikube-instance-repo-access-token"
 
+echo "Starting the process"
+
 # Get the master project id and confirm if it is available
 read -p "Enter name for master project (must be already available): " digikubeMasterProjectId < /dev/tty
 tempMasterProjectId=$(gcloud projects list --filter="project_id=${digikubeMasterProjectId}" --format="value(project_id)")
