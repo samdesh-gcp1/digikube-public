@@ -32,10 +32,12 @@ echo "            K8S Cluster, bastion-host, cloud-resourses         : all"
 echo "            K8S Cluster, bastion-host, cloud-resources, bucket : all-with-bucket"
 read -p "Enter your choice: " deleteChoice < /dev/tty
 
-${bootstrapShell} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} "delete" ${deleteChoice} ${forcedFlag}
+${bootstrapShell} ${digikubeMasterProject} ${digikubeCoreRepoAccessTokenName} ${digikubeCoreRepoAccessTokenVersion} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenName} ${digikubeInstanceRepoAccessTokenVersion} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} "delete" ${deleteChoice} ${forcedFlag}
 
-#rm -rf "${tmpExecDir}"
+rm -rf "${tmpExecDir}"
 
 digikubeCoreRepoAccessToken=""
+digikubeInstanceRepoAccessToken=""
 
 unset digikubeCoreRepoAccessToken
+unset digikubeInstanceRepoAccessToken
