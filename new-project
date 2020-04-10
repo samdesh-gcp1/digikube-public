@@ -42,7 +42,7 @@ serviceAccount=$(gcloud iam service-accounts list --format "value(email)")
 
 #Switch to master project
 gcloud config set project ${digikubeMasterProjectId}
-gcloud secrets add-iam-policy-binding "${DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME}" --member="${serviceAccount}" --role"roles/secretmanager.secretAccessor"
-gcloud secrets add-iam-policy-binding "${DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME}" --member="${serviceAccount}" --role"roles/secretmanager.secretAccessor"
+gcloud secrets add-iam-policy-binding "${DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME}" --member="${serviceAccount}" --role="roles/secretmanager.secretAccessor"
+gcloud secrets add-iam-policy-binding "${DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME}" --member="${serviceAccount}" --role="roles/secretmanager.secretAccessor"
 
 gcloud config set project ${digikubeProjectId}
