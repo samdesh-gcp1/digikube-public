@@ -2,13 +2,43 @@
 #2. Enable API
 #3. Set access to secrets in master project
 
+DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME="digikube-core-repo-access-token"
+DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME="digikube-instance-repo-access-token"
+
+# Get the master project id and confirm if it is available
+read -p "Enter name for master project (must be already available): " digikubeMasterProjectId < /dev/tty
+tempMasterProjectId=$(gcloud projects list --filter="project_id=${digikubeMasterProjectId}" --format="value(project_id)"
+if [[ "${digikubeMasterProjectId}" == "${tempMasterProjectId}" ]]; then
+	temp1=1
+else
+	echo "Master project: ${digikubeMasterProjectId} does not exists.  Exiting..."
+	exit 1
+fi
+
+# Get the name for the new project
 read -p "Enter name for new project: " digikubeProjectId < /dev/tty
-gcloud projects create "${digikubeProjectId}" --enable-cloud-apis --name="${digikubeProjectId}"
+tempProjectId=$(gcloud projects list --filter="project_id=${digikubeProjectId}" --format="value(project_id)"
+if [[ "${digikubeProjectId}" == "${tempProjectId}" ]]; then
+	echo "Project already available.  Do you want to reuse existing project?"
+	read -p "Project already available.  Do you want to reuse existing project? (y/n): " choice < /dev/tty
+	if [[ "${choice}" == "y" ]]; then
+		temp1=1
+	else
+		echo "Exiting..."
+		exit 1
+	fi
+
+else
+	echo "Etempting to create project: ${digikubeProjectId}"
+	gcloud projects create "${digikubeProjectId}" --enable-cloud-apis --name="${digikubeProjectId}"
+	echo "Created project: ${digikubeProjectId}"
+fi
 
 gcloud config set project "${digikubeProjectId}"
 gcloud services enable "compute.googleapis.com"
 serviceAccount=$(gcloud iam service-accounts list --format "value(email)")
 
-gcloud config set project digikube-master3
-
-gcloud secrets add-iam-policy-binding secret-id --member="${serviceAccount}" --role"roles/secretmanager.secretAccessor"
+#Switch to master project
+gcloud config set project ${digikubeMasterProjectId}
+gcloud secrets add-iam-policy-binding "${DIGIKUBE_CORE_REPO_ACCESS_TOKEN_NAME}" --member="${serviceAccount}" --role"roles/secretmanager.secretAccessor"
+gcloud secrets add-iam-policy-binding "${DIGIKUBE_INSTANCE_REPO_ACCESS_TOKEN_NAME}" --member="${serviceAccount}" --role"roles/secretmanager.secretAccessor"
