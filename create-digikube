@@ -15,7 +15,7 @@ digikubeInstanceRepoAccessTokenName="digikube-instance-repo-access-token"
 digikubeInstanceRepoAccessTokenVersion="2"
 
 tempMasterProject=$(gcloud projects list --filter="project_id=${digikubeMasterProject}" --format="value(project_id)")
-if [[ "${digikubeMasterProject}" == "${tempMasterProjectId}" ]]; then
+if [[ "${digikubeMasterProject}" == "${tempMasterProject}" ]]; then
 	temp1=1
 else
 	echo "Master project: ${digikubeMasterProject} does not exists.  Exiting..."
