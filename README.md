@@ -1,4 +1,10 @@
-# Changelog
+# Digikube
+
+There are three github repositories for digikube.  These are:
+1. digikube-public : This is public repository with public read access
+2. digikube-core : This is private repository with bulk of the digikube code.  Access token for this repository will be shared on need basis.
+3. c1-dev1 : This is private repository for storing the configuration details of your digikube environment. (Currently this repo is configured as public with read access to all.  But it can also be created as private repo.)
+
 
 ### 0.26.1
 
@@ -65,11 +71,6 @@ _Breaking Changes:_
 # digikube-public
 
 digikube-public is the starting point for deploying digikube environment.
-
-There are three github repositories for digikube.  These are:
-1. digikube-public : This is public repository with public read access
-2. digikube-core : This is private repository with bulk of the digikube code.  Access token for this repository will be shared on need basis.
-3. c1-dev1 : This is private repository for storing the configuration details of your digikube environment. (Currently this repo is configured as public with read access to all.  But it can also be created as private repo.)
 
 To setup your digikube environment, follow the steps below.
 
