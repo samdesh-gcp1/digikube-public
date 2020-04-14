@@ -31,11 +31,7 @@ To setup your digikube environment, follow the steps below.
 					digikubeCoreRepoAccessTokenVersion="1"		 <= This should be 1 unless you have renewed the access token
 					digikubeInstanceRepoAccessTokenVersion="1"	 <= This should be 1 unless you have renewed the access token
 					forcedFlag="--forced"                        <= Forced deletion of resources even after errors during deletion process
-				
-				The script will prompt you to enter the access token.  Please provide the access token received in step 1 above.
-				
-5
-wget --quiet --no-cache -O - https://raw.githubusercontent.com/samdesh-gcp1/digikube-public/master/create-digikube | bash
+5.  wget --quiet --no-cache -O - https://raw.githubusercontent.com/samdesh-gcp1/digikube-public/master/create-digikube | bash
 
 
 
