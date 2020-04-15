@@ -19,7 +19,7 @@ To setup your digikube environment, follow the steps below.
 		Edit the following lines and update with appropriate values for your environment.
 			`DIGIKUBE_MASTER_PROJECT="digikube-master3"`
 			
-			`DIGIKUBE_CLOUD_REGION="us-central1"`
+			DIGIKUBE_CLOUD_REGION="us-central1"
 	
 		This script created the master project in GCP to securly hold the digikube private repo access token.
 		
