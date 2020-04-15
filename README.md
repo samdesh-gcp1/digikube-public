@@ -80,18 +80,30 @@ To setup your digikube environment, follow the steps below.
    - The cluster is up and ready
 	
 7. Stopping and starting the cluster
-	a. Execute the following command to stop the cluster:
-			digiops cluster stop
-	b. Execute the following command to start the cluster again:
-			digiops cluster start
-			
+   - Execute the following command to stop the cluster:
+     ```
+     digiops cluster stop
+     ```
+   - Execute the following command to start the cluster again:
+     ```
+     digiops cluster start
+     ```
+   - Validate the cluster status using the following command:
+     ```
+     digiops cluster validate
+     ```
+	
 8. Deleting digikube cluster
-	a. Login to your GCP web console
-	b. Launch cloud shell
-	c. Unset the cloud project setting by executing the following command:
-			gcloud config unset project
-	d. Execute the following command to delete digikube cluster:
-			wget --quiet --no-cache -O - https://raw.githubusercontent.com/samdesh-gcp1/digikube-public/master/delete-digikube | bash
-			modify the url to refer to the public repo you have created in step 2 above
-	e. Verify if execution is successfull (it may take upto 5-7 min to complete the entire process).  Verify if the cluster resources are successfully deleted.
-	f. The cluster is deleted
+   - Login to your GCP web console
+   - Launch cloud shell
+   - Unset the cloud project setting by executing the following command:
+     ```
+     gcloud config unset project
+     ```
+   - Execute the following command to delete digikube cluster:
+     ```
+     wget --quiet --no-cache -O - https://raw.githubusercontent.com/samdesh-gcp1/digikube-public/master/delete-digikube | bash
+     ```
+     Modify the url to refer to the public repo you have created in step 2 above
+   - Verify if execution is successfull (it may take upto 5-7 min to complete the entire process).  Verify if the cluster resources are successfully deleted.
+   - The cluster is deleted
