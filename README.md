@@ -85,13 +85,14 @@ To setup your digikube environment, follow the steps below.
      ```
    - The cluster is up and ready
 	
-## Stopping and starting the cluster
+## Stopping and starting the cluster (without deleting)
    
+   - SSH to the bastion host
    - Execute the following command to stop the cluster:
      ```
      digiops cluster stop
      ```
-   - Execute the following command to start the cluster again:
+   - Execute the following command to start the cluster:
      ```
      digiops cluster start
      ```
