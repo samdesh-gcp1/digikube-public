@@ -100,7 +100,37 @@ To setup your digikube environment, follow the steps below.
      ```
      digiops cluster validate
      ```
-	
+
+## Modifying Digikube configuration
+
+Certain cluster resources such as number of worker nodes or the size of the worker nodes can be modified with rolling upgrade.  For this follow the folling steps:
+
+   - Edit the cluster configuration in git hub repository and change the required configurations
+   - SSH to the bastion host
+   - Execute the following command to modify the running cluster:
+     ```
+     digikube cluster synch
+     ```
+   - Please note that current version of digikube (v0.3) supports modification of only select cluster configurations.  For extensive cluster changes including name change, please delete the existing cluster and recreate new cluster with the new configuration.
+   
+## Upgrading Digikube 
+
+   - For latest minor version upgrade, please follow the steps below:
+     - SSH the bastion host
+     - Execute the following command
+       ```
+       digikube cluster reload
+       ```
+   - For specific minor version upgrade, please follow the steps below: (Note: Feature not yet ready)
+     - Change the github repository tag in configurations
+     - SSH the bastion host
+     - Execute the following command
+       ```
+       digikube cluster reload
+       ```
+   - For major version upgrade, it is advised to delete the existing cluster and recreate new cluster.
+
+
 ## Deleting digikube cluster
   
    - Login to your GCP web console
