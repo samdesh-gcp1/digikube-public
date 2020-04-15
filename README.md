@@ -37,15 +37,19 @@ To setup your digikube environment, follow the steps below.
      ```
 
 5. Setting-up digikube-master
-	a. Login to your GCP web console
-	b. Launch cloud shell
-	c. Unset the cloud project setting by executing the following command:
-	   `gcloud config unset project`
-	d. Execute the following command to create master project and populate github access token secret:
-           `wget --quiet --no-cache -O - https://raw.githubusercontent.com/samdesh-gcp1/digikube-public/master/create-digikube-master | bash`
-            Modify the url to refer to the public repo you have created in step 2 above
-	e. Verify if the master project is successfully created
-	f. Verify that the github access token secrete is created
+   a. Login to your GCP web console
+   b. Launch cloud shell
+   c. Unset the cloud project setting by executing the following command:
+      ```
+      gcloud config unset project
+      ```
+   d. Execute the following command to create master project and populate github access token secret:
+      ```
+      wget --quiet --no-cache -O - https://raw.githubusercontent.com/samdesh-gcp1/digikube-public/master/create-digikube-master | bash
+      ```
+      Modify the url to refer to the public repo you have created in step 2 above
+   e. Verify if the master project is successfully created
+   f. Verify that the github access token secrete is created
 
 6. Setting up digikube cluster
 	a. Login to your GCP web console
