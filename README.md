@@ -8,20 +8,17 @@ There are three github repositories for digikube.  These are:
 To setup your digikube environment, follow the steps below.
 
 1. Request the access token for digikube-core
-
 2. Clone the digikube-public repository
-
 3. Clone the c1-dev1 repository
-
 4. edit cloned digikube-public repository to modify the following:
+   a. create-digikube-master
+      Edit the following lines and update with appropriate values for your environment.
+```
+DIGIKUBE_MASTER_PROJECT="digikube-master3"
+DIGIKUBE_CLOUD_REGION="us-central1"
+'''
 
-	a. create-digikube-master
-		Edit the following lines and update with appropriate values for your environment.
-			`DIGIKUBE_MASTER_PROJECT="digikube-master3"`
-			
-			DIGIKUBE_CLOUD_REGION="us-central1"
-	
-		This script created the master project in GCP to securly hold the digikube private repo access token.
+This script created the master project in GCP to securly hold the digikube private repo access token.
 		
 b. create-digikube
 		Edit the following lines and update with appropriate values for your environment.
