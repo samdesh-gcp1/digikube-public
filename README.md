@@ -1,10 +1,14 @@
 # Digikube
 
+Digikube is integrated stack cosnsisting of various digital platform technologies packaged on top of Kubernetes.
+Current Digikube version is specifically designed for GCP and Kubernetes v1.14+
+
 There are three github repositories for digikube.  These are:
 1. digikube-public : This is public repository with public read access
 2. digikube-core : This is private repository with bulk of the digikube code.  Access token for this repository will be shared on need basis.
 3. c1-dev1 : This is private repository for storing the configuration details of your digikube environment. (Currently this repo is configured as public with read access to all.  But it can also be created as private repo.)
 
+## Preparation
 To setup your digikube environment, follow the steps below.
 
 1. Request the access token for digikube-core
@@ -36,7 +40,8 @@ To setup your digikube environment, follow the steps below.
      forcedFlag="--forced"
      ```
 
-5. Setting-up digikube-master
+## Setting up digikube-master 
+
    - Login to your GCP web console
    - Launch cloud shell
    - Unset the cloud project setting by executing the following command:
@@ -51,7 +56,8 @@ To setup your digikube environment, follow the steps below.
    - Verify if the master project is successfully created
    - Verify that the github access token secrete is created
 
-6. Setting up digikube cluster
+## Setting up digikube cluster
+
    - Login to your GCP web console
    - Launch cloud shell
    - Unset the cloud project setting by executing the following command:
@@ -79,7 +85,8 @@ To setup your digikube environment, follow the steps below.
      ```
    - The cluster is up and ready
 	
-7. Stopping and starting the cluster
+## Stopping and starting the cluster
+   
    - Execute the following command to stop the cluster:
      ```
      digiops cluster stop
@@ -93,7 +100,8 @@ To setup your digikube environment, follow the steps below.
      digiops cluster validate
      ```
 	
-8. Deleting digikube cluster
+## Deleting digikube cluster
+  
    - Login to your GCP web console
    - Launch cloud shell
    - Unset the cloud project setting by executing the following command:
