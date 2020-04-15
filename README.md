@@ -13,32 +13,28 @@ To setup your digikube environment, follow the steps below.
 4. edit cloned digikube-public repository to modify the following:
    - create-digikube-master
      Edit the following lines and update with appropriate values for your environment.
-```
-DIGIKUBE_MASTER_PROJECT="digikube-master3"
-DIGIKUBE_CLOUD_REGION="us-central1"
-```
-
-This script created the master project in GCP to securly hold the digikube private repo access token.
-		
+     ```
+     DIGIKUBE_MASTER_PROJECT="digikube-master3"
+     DIGIKUBE_CLOUD_REGION="us-central1"
+     ```
+     This script created the master project in GCP to securly hold the digikube private repo access token.	
    - create-digikube
      Edit the following lines and update with appropriate values for your environment.
-
-```
-digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/c1-dev1/master"
-digikubeMasterProject="digikube-master3"
-digikubeCoreRepoAccessTokenVersion="1"
-digikubeInstanceRepoAccessTokenVersion="1"
-```
-
+     ```
+     digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/c1-dev1/master"
+     digikubeMasterProject="digikube-master3"
+     digikubeCoreRepoAccessTokenVersion="1"
+     digikubeInstanceRepoAccessTokenVersion="1"
+     ```
    - delete-digikube
      Edit the following lines and update with appropriate values for your environment.
-```
-digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/c1-dev1/master"
-digikubeMasterProject="digikube-master3"
-digikubeCoreRepoAccessTokenVersion="1"
-digikubeInstanceRepoAccessTokenVersion="1"
-forcedFlag="--forced"
-```
+     ```
+     digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/c1-dev1/master"
+     digikubeMasterProject="digikube-master3"
+     digikubeCoreRepoAccessTokenVersion="1"
+     digikubeInstanceRepoAccessTokenVersion="1"
+     forcedFlag="--forced"
+     ```
 
 5. Setting-up digikube-master
 	a. Login to your GCP web console
