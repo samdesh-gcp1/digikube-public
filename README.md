@@ -20,10 +20,10 @@ To setup your digikube environment, follow the steps below.
 			`DIGIKUBE_MASTER_PROJECT="digikube-master3"`
 			
 			`DIGIKUBE_CLOUD_REGION="us-central1"`
-			
-   		This script creates the master project in GCP to securly hold the digikube private repo access token.
+	
+		This script created the master project in GCP to securly hold the digikube private repo access token.
 		
-	b. create-digikube
+b. create-digikube
 		Edit the following lines and update with appropriate values for your environment.
 			digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/c1-dev1/master"
 			digikubeMasterProject="digikube-master3"
