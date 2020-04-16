@@ -34,7 +34,7 @@ read -p "Enter your choice: " deleteChoice < /dev/tty
 
 ${bootstrapShell} ${digikubeMasterProject} ${digikubeCoreRepoAccessTokenName} ${digikubeCoreRepoAccessTokenVersion} ${digikubeCoreRepoAccessTokenValue} ${digikubeCoreRawRepoUrl} ${digikubeInstanceRepoAccessTokenName} ${digikubeInstanceRepoAccessTokenVersion} ${digikubeInstanceRepoAccessTokenValue} ${digikubeInstanceRawRepoUrl} "delete" ${deleteChoice} ${forcedFlag}
 
-rm -rf "${tmpExecDir}"
+#rm -rf "${tmpExecDir}"
 
 digikubeCoreRepoAccessToken=""
 digikubeInstanceRepoAccessToken=""
