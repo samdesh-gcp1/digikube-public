@@ -5,7 +5,8 @@
 # Update the values as per your requirements
 ############################################################################################
 digikubeCoreRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/digikube-core/master"
-digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/c1-dev1/master"
+#digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/c1-dev1/master"
+digikubeInstanceRawRepoUrl="https://raw.githubusercontent.com/samdesh-gcp1/ckad-text/master"
 
 #Following values are also set in bastion-init-shell...  be consistent
 digikubeMasterProject="digikube-master3"
